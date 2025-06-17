@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: test-task-two-postgres
+    environment:
+      POSTGRES_DB: test-task-two
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

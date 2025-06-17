@@ -1,0 +1,18 @@
+env:
+
+app:
+  env:
+  name:
+  version:
+
+postgres:
+  type:
+  host:
+  port:
+  name:
+  user:
+  password:
+  schema:
+  maxAttempts:
+  attemptDelay:
+  migrationPath:
