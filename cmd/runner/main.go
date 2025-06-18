@@ -9,7 +9,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"test-task-two/internal/api"
+	"test-task-two/internal/api/crut"
+	"test-task-two/internal/app"
 	"test-task-two/internal/config"
+	PgRepository "test-task-two/internal/db/pg"
+	ServApi "test-task-two/internal/service/api"
+	"test-task-two/internal/service/db/pg"
 )
 
 func main() {
@@ -26,6 +32,23 @@ func main() {
 	}
 	log.Println("Postgres успешно запущен")
 	log.Println("Сервис успешно запущен")
+
+	PgParams := PgRepository.Params{Db: poolPg}
+	PgRepo := PgRepository.NewRepository(&PgParams)
+
+	PgService := pg.NewService(PgRepo)
+
+	CrutParams := crut.Params{RepoPg: PgService}
+	Crut := crut.NewCrut(&CrutParams)
+
+	ApiServiceParams := ServApi.Params{Api: Crut}
+	ApiService := ServApi.NewService(&ApiServiceParams)
+
+	router := api.NewRouter(ApiService)
+
+	App := app.NewApp(router)
+
+	App.Init(ctx)
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
