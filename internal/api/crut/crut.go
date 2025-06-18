@@ -3,6 +3,7 @@ package crut
 import (
 	"context"
 	"encoding/json"
+	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
 	"test-task-two/internal/models/request"
@@ -56,7 +57,7 @@ func (c *Crut) GetAmount(w http.ResponseWriter, r *http.Request) {
 	const op = "router.GetAmount"
 	ctx := context.WithValue(r.Context(), "router", op)
 
-	uuid := r.URL.Query().Get("uuid")
+	uuid := chi.URLParam(r, "uuid")
 	if uuid == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		return

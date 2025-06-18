@@ -26,7 +26,7 @@ func (r *Router) Init(ctx context.Context) {
 
 	r.router = chi.NewRouter()
 
-	r.router.Route("api/v1", func(router chi.Router) {
+	r.router.Route("/api/v1", func(router chi.Router) {
 		router.Post("/wallet/", r.apiServ.AddAndWithdrawAmount)
 		router.Get("/wallets/{uuid}", r.apiServ.GetAmount)
 	})
