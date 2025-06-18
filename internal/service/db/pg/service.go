@@ -15,11 +15,11 @@ func NewService(repo pg.Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) AddAmount(ctx context.Context, reqModel *request.Request) error {
+func (s *Service) AddAmount(ctx context.Context, reqModel *request.Request) (*response.Response, error) {
 	return s.repo.AddAmount(ctx, reqModel)
 }
 
-func (s *Service) WithdrawAmount(ctx context.Context, reqModel *request.Request) error {
+func (s *Service) WithdrawAmount(ctx context.Context, reqModel *request.Request) (*response.Response, error) {
 	return s.repo.WithdrawAmount(ctx, reqModel)
 }
 
