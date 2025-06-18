@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Подключение к базе данных PostgreSQL
-	connString := "postgres://demo:demo@localhost:5432/test-task-one"
+	connString := "postgres://demo:demo@localhost:5432/test-task-two"
 	pool, err := pgxpool.New(context.Background(), connString)
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v", err)
@@ -22,7 +22,7 @@ func main() {
 	ctx := context.Background()
 
 	// Чтение файла миграции
-	migration, err := os.ReadFile("migrations/pg/init.sql")
+	migration, err := os.ReadFile("migrations/init.sql")
 	if err != nil {
 		log.Fatalf("Failed to read migration file: %v", err)
 	}
